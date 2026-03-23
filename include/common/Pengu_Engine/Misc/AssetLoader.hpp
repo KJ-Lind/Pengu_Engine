@@ -1,0 +1,5 @@
+#ifndef ASSETLOADER_HPP
+#define ASSETLOADER_HPP 1
+
+
+#endif // !ASSETLODER_HPP
