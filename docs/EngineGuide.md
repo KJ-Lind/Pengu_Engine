@@ -146,6 +146,8 @@ Pengu Engine uses a **pipeline-based renderer**. Each render mode is a separate 
 
 ### How to Switch Pipeline at Runtime
 
+You can use the Scene tab to select what Pipeline you want to use or you can change it in code using the example below.
+
 Call `setPipeline()` on the renderer at any point — for example inside your scene's `update()` on a key press:
 
 ```cpp
