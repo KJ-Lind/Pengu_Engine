@@ -26,6 +26,9 @@
     --resource:  #b44fff;
     --ecs:       #4fc8ff;
     --ui:        #e879f9;
+    --qt:        #41cd52;
+    --viewport:  #f97316;
+    --state:     #fb923c;
   }
 
   body {
@@ -37,7 +40,6 @@
     overflow-x: hidden;
   }
 
-  /* Grid background */
   body::before {
     content: '';
     position: fixed;
@@ -53,7 +55,7 @@
   .wrapper {
     position: relative;
     z-index: 1;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -81,7 +83,6 @@
     text-transform: uppercase;
   }
 
-  /* ── Diagram layout ── */
   .diagram {
     display: flex;
     flex-direction: column;
@@ -89,7 +90,6 @@
     align-items: center;
   }
 
-  /* Nodes */
   .node {
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -158,11 +158,22 @@
   .c-component { border-color: #334; background: #0d1018; }
   .c-component .node-label { color: #8899bb; font-size: 0.85rem; }
 
-  .c-ui      { border-color: var(--ui);      box-shadow: 0 0 20px rgba(232,121,249,0.1); }
-  .c-ui      .node-label { color: var(--ui); }
-  .c-ui      .node-tag   { background: var(--ui); color: #000; }
+  .c-ui       { border-color: var(--ui);       box-shadow: 0 0 20px rgba(232,121,249,0.1); }
+  .c-ui       .node-label { color: var(--ui); }
+  .c-ui       .node-tag   { background: var(--ui); color: #000; }
 
-  /* ── Row layouts ── */
+  .c-qt       { border-color: var(--qt);       box-shadow: 0 0 20px rgba(65,205,82,0.12); }
+  .c-qt       .node-label { color: var(--qt); }
+  .c-qt       .node-tag   { background: var(--qt); color: #000; }
+
+  .c-viewport { border-color: var(--viewport); box-shadow: 0 0 20px rgba(249,115,22,0.12); }
+  .c-viewport .node-label { color: var(--viewport); }
+  .c-viewport .node-tag   { background: var(--viewport); color: #000; }
+
+  .c-state    { border-color: var(--state);    box-shadow: 0 0 20px rgba(251,146,60,0.1); }
+  .c-state    .node-label { color: var(--state); }
+  .c-state    .node-tag   { background: var(--state); color: #000; }
+
   .row {
     display: flex;
     gap: 16px;
@@ -171,7 +182,6 @@
     width: 100%;
   }
 
-  /* ── Connectors ── */
   .connector {
     display: flex;
     flex-direction: column;
@@ -207,26 +217,6 @@
     margin: 2px 0;
   }
 
-  /* Horizontal connector */
-  .h-connector {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    justify-content: center;
-    padding: 0 8px;
-    position: relative;
-    height: 32px;
-  }
-
-  .h-line {
-    height: 2px;
-    flex: 1;
-    background: linear-gradient(to right, transparent, var(--muted), transparent);
-    max-width: 80px;
-  }
-
-  /* Split connector — one line down, splits into N */
   .split-wrapper {
     display: flex;
     flex-direction: column;
@@ -285,7 +275,6 @@
     margin-bottom: 4px;
   }
 
-  /* Pipeline grid */
   .pipeline-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -323,7 +312,6 @@
     line-height: 1.5;
   }
 
-  /* Component chips */
   .chips {
     display: flex;
     gap: 8px;
@@ -341,45 +329,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Sidebar layout for resource + scene */
-  .side-row {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 16px;
-    align-items: start;
-    width: 100%;
-    max-width: 900px;
-  }
-
-  .side-connector {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 28px;
-    color: var(--muted);
-    font-size: 0.65rem;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .dashed-h {
-    width: 40px;
-    height: 1px;
-    border-top: 2px dashed var(--muted);
-    opacity: 0.4;
-  }
-
-  /* Section */
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: center;
-    margin: 4px 0;
-  }
-
-  /* Legend */
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -404,7 +353,6 @@
     border-radius: 2px;
   }
 
-  /* Animations */
   @keyframes fadeDown {
     from { opacity: 0; transform: translateY(-20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -434,6 +382,63 @@
     text-align: center;
     margin-top: 4px;
   }
+
+  /* Qt layer bracket */
+  .qt-bracket {
+    border: 1px dashed rgba(65,205,82,0.3);
+    border-radius: 14px;
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 4px;
+    background: rgba(65,205,82,0.02);
+  }
+
+  .qt-bracket-label {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--qt);
+    background: var(--bg);
+    padding: 0 8px;
+    font-weight: 600;
+  }
+
+  .dock-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .dock-node {
+    border: 1px solid rgba(232,121,249,0.3);
+    border-radius: 8px;
+    padding: 10px 8px;
+    background: #0f0a14;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .dock-node:hover { transform: translateY(-2px); }
+
+  .dock-node .name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--ui);
+  }
+
+  .dock-node .detail {
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
 </style>
 </head>
 <body>
@@ -441,41 +446,147 @@
 
   <header>
     <h1>Pengu <span>Engine</span></h1>
-    <p>Renderer Architecture · ECS + Pipeline System</p>
+    <p>Renderer Architecture · ECS + Pipeline System · Qt UI Layer</p>
   </header>
 
   <div class="diagram">
 
-    <!-- UI LAYER -->
-    <div class="row">
-      <div class="node c-ui" style="min-width:320px; text-align:center;">
-        <div class="node-tag">Editor</div>
-        <div class="node-label">EngineUI</div>
-        <div class="node-sub">imgui editor overlay · scene / pipeline / entity management</div>
-        <div class="chips" style="margin-top:10px;">
-          <span class="chip">EditorState</span>
-          <span class="chip">ScenePanel</span>
-          <span class="chip">HierarchyPanel</span>
-          <span class="chip">InspectorPanel</span>
-          <span class="chip">PipelinePanel</span>
-          <span class="chip">Viewport</span>
+    <!-- QT APPLICATION LAYER -->
+    <div class="qt-bracket" style="max-width:1100px;">
+      <div class="qt-bracket-label">Qt 6 Application Layer</div>
+
+      <!-- QMainWindow -->
+      <div class="row">
+        <div class="node c-qt" style="min-width:360px; text-align:center;">
+          <div class="node-tag">Qt Window</div>
+          <div class="node-label">QMainWindow</div>
+          <div class="node-sub">owns all dock widgets · drives Qt event loop · replaces GLFW window</div>
+          <div class="chips" style="margin-top:10px;">
+            <span class="chip" style="border-color:#41cd5255; color:#41cd52;">app.exec()</span>
+            <span class="chip" style="border-color:#41cd5255; color:#41cd52;">QDockWidget</span>
+            <span class="chip" style="border-color:#41cd5255; color:#41cd52;">setCentralWidget()</span>
+          </div>
         </div>
+      </div>
+
+      <!-- QMainWindow splits into ViewportWidget + Dock panels -->
+      <div class="split-wrapper" style="width:100%;">
+        <div class="split-top-line"></div>
+        <div class="split-horizontal"></div>
+        <div class="split-cols" style="width:85%;">
+          <div class="split-col"><div class="split-col-line"></div><div class="split-col-arrow">▼</div></div>
+          <div class="split-col"><div class="split-col-line"></div><div class="split-col-arrow">▼</div></div>
+        </div>
+      </div>
+
+      <!-- ViewportWidget + EditorState row -->
+      <div class="row" style="max-width:1000px; align-items:start; gap:24px;">
+
+        <!-- ViewportWidget -->
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1.2;">
+          <div class="node c-viewport" style="width:100%; text-align:center;">
+            <div class="node-tag">Central Widget</div>
+            <div class="node-label">ViewportWidget</div>
+            <div class="node-sub">QOpenGLWidget subclass · owns FBO · drives render loop via QTimer</div>
+            <div class="chips" style="margin-top:10px;">
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">initializeGL()</span>
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">resizeGL(w,h)</span>
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">paintGL()</span>
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">QOpenGLFunctions_4_6_Core</span>
+            </div>
+          </div>
+
+          <!-- FBO sub-node -->
+          <div style="color:var(--muted); font-size:10px; margin: 8px 0 4px;">▼ owns</div>
+          <div class="node c-component" style="width:100%; text-align:center;">
+            <div class="node-label">FBO (GL 4.6 DSA)</div>
+            <div class="chips" style="margin-top:8px;">
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">m_colorTex (RGBA16F)</span>
+              <span class="chip" style="border-color:#f9731655; color:#f97316;">m_depthRBO (D24S8)</span>
+            </div>
+            <div style="font-size:0.62rem; color:var(--muted); margin-top:6px;">glCreateFramebuffers · DSA · rebuilt on resizeGL()</div>
+          </div>
+
+          <div style="margin-top:10px; border:1px dashed #2a3040; border-radius:8px; padding:10px; width:100%; text-align:center;">
+            <div style="font-size:0.62rem; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.08em;">paintGL() frame order</div>
+            <div style="font-size:0.65rem; color:#5a6480; line-height:1.9;">
+              1. glBindFramebuffer(m_fbo)<br>
+              2. engine.update() → 3D render<br>
+              3. glBindFramebuffer(defaultFBO())<br>
+              4. ui.render(state, m_colorTex)
+            </div>
+          </div>
+        </div>
+
+        <!-- divider -->
+        <div style="width:1px; background:var(--border); align-self:stretch; margin: 0 4px;"></div>
+
+        <!-- EngineUI + Dock Panels -->
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+          <div class="node c-ui" style="width:100%; text-align:center;">
+            <div class="node-tag">Editor</div>
+            <div class="node-label">EngineUI</div>
+            <div class="node-sub">init(engine, mainWindow) · render(state, fboTexID) · shutdown()</div>
+            <div class="chips" style="margin-top:10px;">
+              <span class="chip">EditorState&amp;</span>
+              <span class="chip">Engine*</span>
+            </div>
+          </div>
+
+          <div style="color:var(--muted); font-size:10px; margin: 8px 0 4px;">▼ creates</div>
+
+          <!-- Dock panels grid -->
+          <div class="dock-grid" style="width:100%;">
+            <div class="dock-node">
+              <div class="name">Scene Hierarchy</div>
+              <div class="detail">QTreeWidget<br>Left dock<br>entity list</div>
+            </div>
+            <div class="dock-node">
+              <div class="name">Inspector</div>
+              <div class="detail">QFormLayout<br>Right dock<br>component editor</div>
+            </div>
+            <div class="dock-node">
+              <div class="name">Asset Browser</div>
+              <div class="detail">QTreeWidget<br>Bottom dock<br>std::filesystem</div>
+            </div>
+            <div class="dock-node">
+              <div class="name">Profiler</div>
+              <div class="detail">QWidget<br>Bottom dock<br>frame timings</div>
+            </div>
+          </div>
+
+          <!-- EditorState -->
+          <div style="color:var(--muted); font-size:10px; margin: 8px 0 4px;">▼ reads / writes</div>
+          <div class="node c-state" style="width:100%; text-align:center;">
+            <div class="node-tag">Plain Data</div>
+            <div class="node-label">EditorState</div>
+            <div class="node-sub">no Qt / Engine deps · pure data bridge</div>
+            <div class="chips" style="margin-top:8px;">
+              <span class="chip" style="border-color:#fb923c55; color:#fb923c;">selectedEntityID</span>
+              <span class="chip" style="border-color:#fb923c55; color:#fb923c;">isPlaying</span>
+              <span class="chip" style="border-color:#fb923c55; color:#fb923c;">viewportWidth/Height</span>
+              <span class="chip" style="border-color:#fb923c55; color:#fb923c;">showProfiler</span>
+              <span class="chip" style="border-color:#fb923c55; color:#fb923c;">assetBrowserRoot</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- UI → ENGINE arrow -->
+    <!-- Qt → Engine arrow -->
     <div class="connector" style="align-items:center;">
       <div class="arrow-line"></div>
-      <div class="arrow-label">onScene / onPipeline / onEntity callbacks</div>
+      <div class="arrow-label">engine.init() in initializeGL() · engine.update() in paintGL() · engine.onResize() in resizeGL()</div>
       <div style="color:var(--muted); font-size:10px; margin-bottom:4px;">▼</div>
     </div>
 
     <!-- ENGINE -->
     <div class="row">
-      <div class="node c-engine" style="min-width:320px; text-align:center;">
+      <div class="node c-engine" style="min-width:360px; text-align:center;">
         <div class="node-tag">Core</div>
-        <div class="node-label">Engine</div>
-        <div class="node-sub">owns Renderer · owns ResourceManager · owns active Scene · driven by EngineUI</div>
+        <div class="node-label">PenguEngine</div>
+        <div class="node-sub">no Qt deps · update() · loadScene() · onResize() · init() called from initializeGL()</div>
         <div class="chips" style="margin-top:10px;">
           <span class="chip">Camera</span>
           <span class="chip">m_activeScene</span>
@@ -520,7 +631,6 @@
           </div>
         </div>
 
-        <!-- Renderer → Pipelines -->
         <div class="split-wrapper" style="width:100%;">
           <div class="split-top-line"></div>
           <div class="split-horizontal"></div>
@@ -532,7 +642,6 @@
           </div>
         </div>
 
-        <!-- Pipeline nodes -->
         <div class="pipeline-grid" style="width:100%;">
           <div class="pipeline-node">
             <div class="name">Unlit</div>
@@ -581,7 +690,6 @@
         <div class="connector" style="width:2px; height:28px; background:var(--muted); margin: 8px 0;"></div>
         <div style="color:var(--muted); font-size:10px; margin-bottom:8px;">▼</div>
 
-        <!-- Components -->
         <div class="node c-component" style="width:100%; text-align:center;">
           <div class="node-label">Components</div>
           <div class="chips" style="margin-top:8px;">
@@ -632,11 +740,15 @@
 
     </div>
 
-    <!-- Data flow note -->
-    <div style="margin-top: 40px; border: 1px solid #1e2535; border-radius: 10px; padding: 20px 28px; max-width: 900px; width:100%; background:#0d1018;">
+    <!-- Frame loop data flow -->
+    <div style="margin-top: 40px; border: 1px solid #1e2535; border-radius: 10px; padding: 20px 28px; max-width: 1000px; width:100%; background:#0d1018;">
       <div style="font-family:'Syne',sans-serif; font-weight:700; color:#fff; margin-bottom:14px; font-size:0.95rem;">Frame Loop Data Flow</div>
-      <div style="display:flex; gap:0; align-items:center; flex-wrap:wrap; gap: 8px;">
-        <span style="background:#111520; border:1px solid var(--ui); color:var(--ui); padding:6px 12px; border-radius:6px; font-size:0.72rem;">EngineUI::Render()</span>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <span style="background:#111520; border:1px solid var(--qt); color:var(--qt); padding:6px 12px; border-radius:6px; font-size:0.72rem;">QTimer::timeout</span>
+        <span style="color:var(--muted);">→</span>
+        <span style="background:#111520; border:1px solid var(--viewport); color:var(--viewport); padding:6px 12px; border-radius:6px; font-size:0.72rem;">ViewportWidget::paintGL()</span>
+        <span style="color:var(--muted);">→</span>
+        <span style="background:#111520; border:1px solid var(--viewport); color:var(--viewport); padding:6px 12px; border-radius:6px; font-size:0.72rem;">glBindFramebuffer(FBO)</span>
         <span style="color:var(--muted);">→</span>
         <span style="background:#111520; border:1px solid var(--engine); color:var(--engine); padding:6px 12px; border-radius:6px; font-size:0.72rem;">Engine::update()</span>
         <span style="color:var(--muted);">→</span>
@@ -647,9 +759,14 @@
         <span style="background:#111520; border:1px solid var(--ecs); color:var(--ecs); padding:6px 12px; border-radius:6px; font-size:0.72rem;">World::getEntitiesWith&lt;T&gt;()</span>
         <span style="color:var(--muted);">→</span>
         <span style="background:#111520; border:1px solid #334; color:#8899bb; padding:6px 12px; border-radius:6px; font-size:0.72rem;">glDrawElements()</span>
+        <span style="color:var(--muted);">→</span>
+        <span style="background:#111520; border:1px solid var(--ui); color:var(--ui); padding:6px 12px; border-radius:6px; font-size:0.72rem;">EngineUI::render(state, fboTexID)</span>
       </div>
-      <div style="margin-top:16px; font-size:0.68rem; color:var(--muted); line-height:1.8;">
-        <span style="color:#e879f955; margin-right:4px;">◆</span> UI layer: <code style="color:#aaa;">EngineUI::Render(editor, fboTexID)</code> — called each frame after <code style="color:#aaa;">ImGui::NewFrame()</code>, reads/writes EditorState<br>
+      <div style="margin-top:16px; font-size:0.68rem; color:var(--muted); line-height:1.9;">
+        <span style="color:#41cd5255; margin-right:4px;">◆</span> Qt event loop: <code style="color:#aaa;">app.exec()</code> replaces <code style="color:#aaa;">while(running)</code> — QTimer fires paintGL() at 16ms (~60fps) or 0ms (uncapped)<br>
+        <span style="color:#f9731655; margin-right:4px;">◆</span> FBO: <code style="color:#aaa;">glBindFramebuffer(defaultFramebufferObject())</code> — must restore Qt's internal FBO before UI render, never bind to 0<br>
+        <span style="color:#f9731655; margin-right:4px;">◆</span> Resize: <code style="color:#aaa;">resizeGL(w,h)</code> → destroyFBO() + createFBO(w,h) + engine.onResize(w,h) — Qt calls this automatically<br>
+        <span style="color:#e879f955; margin-right:4px;">◆</span> UI layer: <code style="color:#aaa;">EngineUI::render(state, fboTexID)</code> — reads/writes EditorState, no Qt headers in Engine<br>
         <span style="color:#4fffb055; margin-right:4px;">◆</span> Scene switching: <code style="color:#aaa;">engine.loadScene(newScene)</code> — old scene + all its entities destroyed automatically<br>
         <span style="color:#4fffb055; margin-right:4px;">◆</span> Pipeline switching: <code style="color:#aaa;">renderer.setPipeline(make_unique&lt;DeferredPipeline&gt;(rm))</code> — cleanup() → init() called automatically<br>
         <span style="color:#4fffb055; margin-right:4px;">◆</span> Resource ownership: Scene entities hold <code style="color:#aaa;">shared_ptr</code>, ResourceManager holds <code style="color:#aaa;">weak_ptr</code>
@@ -660,13 +777,16 @@
 
   <!-- Legend -->
   <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--qt);"></div>Qt Layer</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--viewport);"></div>ViewportWidget / FBO</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--state);"></div>EditorState</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--ui);"></div>EngineUI</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--engine);"></div>Engine</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--scene);"></div>Scene</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--renderer);"></div>Renderer</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--pipeline);"></div>RenderPipeline</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--resource);"></div>ResourceManager</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--ecs);"></div>ECS World</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--ui);"></div>EngineUI</div>
   </div>
 
 </div>

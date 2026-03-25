@@ -2,6 +2,10 @@
 #include "Pengu_Engine/PenguEngine.hpp"
 #include "Pengu_Engine/Scene/LightScene.hpp"
 #include "Pengu_Engine/Misc/FramRate.hpp"
+#include "Pengu_Engine/Editor/EngineUI.hpp"
+#include "Pengu_Engine/Editor/EditorState.hpp"
+
+#include <iostream>
 
 using Pengu::Core::PenguEngine;
 using Pengu::Core::EngineConfig;
@@ -13,10 +17,23 @@ int main() {
 
 	engine.loadScene(std::make_unique<Pengu::Scene::LightScene>(&engine));
 
-	while (!engine.IsClosing() &&
-		!engine.GetInput().isDown(Action::Escape))
+	EditorState state;
+	EngineUI    ui;
+	ui.init(engine.GetWindow().GetWindow(), &engine);
+
+	while (!engine.IsClosing())
 	{
-		engine.update();
+		auto t0 = std::chrono::high_resolution_clock::now();
+
+		engine.update();                      // renders into FBO
+		ui.render(state);           // ImGui over the top
+
+		auto t1 = std::chrono::high_resolution_clock::now();
+		state.lastFrameMs = std::chrono::duration<float, std::milli>(t1 - t0).count();
+		state.fps = 1000.f / state.lastFrameMs;
+
 		engine.EndFrame();
 	}
+
+	ui.shutdown();
 }

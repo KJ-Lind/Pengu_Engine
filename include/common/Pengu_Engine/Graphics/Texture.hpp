@@ -10,6 +10,7 @@ namespace Pengu::Graphics {
 		void Bind(unsigned int slot = 0);
 		const std::string& path() const { return t_path_; }
 		~Texture();
+		unsigned int getID() const { return t_id_; }
 
 	private:
 		unsigned int t_id_ = 0;

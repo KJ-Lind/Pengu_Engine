@@ -84,7 +84,6 @@ namespace Pengu::Core {
 		/** @brief Returns a reference to the window management system. */
 		Window& GetWindow() { return *m_window; }
 		Input& GetInput() { return *m_input; }
-		StatPanel& GetPanel() { return *panel_; }
 		Camera& GetCamera() { return m_camera; }
 		Logger& Log() { return log_; }
 		Pengu::Resources::ResourceManager& GetResourceManager();
@@ -98,13 +97,19 @@ namespace Pengu::Core {
 
 		void update();
 
+		void onResize(int w, int h) {
+			m_renderer->onResize(w, h);
+			GetCamera().CreatePrespective(w, h);
+		}
+
+		void setOutputFBO(unsigned int fbo) { m_outputFBO = fbo; }
+
 	private:
 		/**
 		 * @brief Private constructor used by the static create() factory methods.
 		 */
 		PenguEngine(std::unique_ptr<Window> window,
 			std::unique_ptr<Input> input,
-			std::unique_ptr<StatPanel> panel,
 			Camera                      camera,
 			Logger                      log,
 			std::unique_ptr<Pengu::Resources::ResourceManager> rm,
@@ -114,12 +119,13 @@ namespace Pengu::Core {
 
 		std::unique_ptr<Window> m_window;    ///< The GLFW window context.
 		std::unique_ptr<Input> m_input;      ///< Keyboard and Mouse input state.
-		std::unique_ptr<StatPanel> panel_;  ///< UI overlay for engine performance stats.
 		Camera m_camera;											///< The primary viewing camera.
 		Logger log_;
 		std::unique_ptr<Pengu::Resources::ResourceManager> m_resourceManager;
 		std::unique_ptr<Pengu::Scene::SceneManager> m_scenemanager;
 		std::unique_ptr<Pengu::Graphics::Rendering::Renderer> m_renderer;
+
+		unsigned int m_outputFBO = 0;
 		// Add all the other systems
 	};
 }

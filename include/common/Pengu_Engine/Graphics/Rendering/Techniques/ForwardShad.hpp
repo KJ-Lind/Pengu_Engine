@@ -36,8 +36,8 @@ namespace Pengu::Graphics::Rendering {
 		}
 
 	private:
-		void initLightShadowMap(Lights& light);
-		void destroyLightShadowMap(Lights& light);
+		void initLightShadowMap();
+		void destroyLightShadowMap();
 		void shadowPass(Lights& light, Pengu::Scene::SceneBase& scene);
 		void setupShadowMap();
 		glm::mat4 buildLightSpaceMatrix(const Lights& ld, const TransformComponent& t);
@@ -53,6 +53,10 @@ namespace Pengu::Graphics::Rendering {
 		bool m_firstpass = true;
 		int m_width = 0;
 		int m_height = 0;
+
+		int shadowResolution = 256;
+		GLuint shadowMapFBO = 0;
+		GLuint shadowMapTexture = 0;
 	};
 }
 #endif // !FORWARDSHAD_HPP

@@ -58,11 +58,7 @@ struct Lights {
 	float quadratic_ = 0.0019f;
 
 	float shadowSoftness_ = 1.0f;
-
 	bool castsShadows = true;
-	int shadowResolution = 256;
-	GLuint shadowMapFBO = 0;
-	GLuint shadowMapTexture = 0;
 	glm::mat4 lightSpaceMatrix = glm::mat4(1.0f);
 };
 

@@ -21,3 +21,4 @@ PremakeDeps
 PremakeToolchain
 
 [options]
+qt/*:shared=True
