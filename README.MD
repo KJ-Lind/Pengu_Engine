@@ -1,31 +1,97 @@
-# Pengu Engine
+# 🐧 Pengu Engine
 
-## Prerequisites
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=for-the-badge&logo=windows)
+![Visual Studio](https://img.shields.io/badge/IDE-Visual%20Studio%202022-purple?style=for-the-badge&logo=visualstudio)
+![Conan](https://img.shields.io/badge/package%20manager-Conan%202-orange?style=for-the-badge)
 
-Before building the project, ensure that **Conan 2** is installed on your machine.
+A lightweight, extensible game engine built for rapid scene development and scripting.
 
-If Conan 2 is already installed, you may proceed directly to the [Building the Project](#building-the-project) section. If not, please follow the installation guide first: [Install Conan 2](./docs/ConanInstall.md).
+[Getting Started](#-getting-started) · [Building](#️-building-the-project) · [Engine Guide](#-how-to-use-the-engine) · [Docs](./docs/)
 
 ---
 
-## Building the Project
+## 📋 Overview
 
-To generate the Visual Studio solution, locate the `genproject.bat` file inside the `tools` folder at the root.
+Pengu Engine is a game engine designed for ease of use — from scene creation and scripting to rendering. Whether you're prototyping a game or building something from the ground up, Pengu provides a streamlined workflow backed by a Visual Studio 2022 solution.
 
-If the file is not present, please contact the engine maintainer to obtain a complete copy of the Engine with the batch file included.
+---
 
-Once confirmed, run `genproject.bat` by double-clicking it or executing it from the command line:
+## ✅ Getting Started
+
+### Prerequisites
+
+Before building the project, make sure **Conan 2** is installed on your machine.
+
+| Requirement | Version | Notes |
+|---|---|---|
+| [Conan](https://conan.io/) | 2.x | Dependency manager |
+| [Visual Studio](https://visualstudio.microsoft.com/) | 2022 | C++ workload required |
+
+> **Already have Conan 2?** Skip ahead to [Building the Project](#️-building-the-project).
+>
+> **Need to install it?** Follow the step-by-step guide: [Install Conan 2](./docs/ConanInstall.md)
+
+---
+
+## 🛠️ Building the Project
+
+### 1. Locate the build script
+
+Find `genproject.bat` inside the `tools/` folder at the root of the repository:
+
+```
+pengu-engine/
+└── tools/
+    └── genproject.bat   ← run this
+```
+
+> ⚠️ If `genproject.bat` is missing, contact the engine maintainer to obtain a complete copy of the engine with all tooling included.
+
+### 2. Run the script
+
+Double-click `genproject.bat`, or run it from the command line:
 
 ```bash
 tools\genproject.bat
 ```
 
-This will install all required dependencies via Conan and generate a Visual Studio solution (`.sln`) in the build directory. Open the solution in **Visual Studio 2022** to begin development.
+### 3. Open in Visual Studio
+
+The script will:
+- Install all required dependencies via **Conan 2**
+- Generate a Visual Studio solution (`.sln`) in the `build/` directory
+
+Open the generated `.sln` file in **Visual Studio 2022** to begin development.
 
 ---
 
-## How to Use the Engine
+## 📖 How to Use the Engine
 
-For a full step-by-step guide on using Pengu Engine — including scene creation, scripting, and rendering — refer to the engine guide:
+For a full step-by-step guide covering scene creation, scripting, rendering, and more, refer to the engine documentation:
 
-[Engine Guide](./docs/EngineGuide.md)
+**[→ Engine Guide](./docs/EngineGuide.md)**
+
+---
+
+## 📁 Project Structure
+
+```
+pengu-engine/
+├── docs/
+│   ├── ConanInstall.md     # Conan 2 installation guide
+│   └── EngineGuide.md      # Full engine usage guide
+├── tools/
+│   └── genproject.bat      # Project generation script
+└── build/                  # Generated Visual Studio solution (after build)
+```
+
+---
+
+## 🤝 Contributing
+
+If you'd like to contribute or report an issue, please reach out to the engine maintainer or open an issue in the repository.
+
+---
+
+*Made with ❄️ by the Pengu Engine team*
