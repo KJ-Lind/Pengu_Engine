@@ -36,7 +36,6 @@ namespace Pengu::Graphics::Rendering {
 		}
 
 	private:
-		void initLightShadowMap();
 		void destroyLightShadowMap();
 		void shadowPass(Lights& light, Pengu::Scene::SceneBase& scene);
 		void setupShadowMap();

@@ -8,7 +8,6 @@
 
 #include "Pengu_Engine/Window/Window.hpp"
 #include "Pengu_Engine/Inputs/Input.hpp"
-#include "Pengu_Engine/Misc/StatPanel.hpp"
 #include "Pengu_Engine/Camera/Camera.hpp"
 #include "Pengu_Engine/Misc/Logger.hpp"
 

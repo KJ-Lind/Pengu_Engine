@@ -48,19 +48,18 @@ uniform Light light;
 
 float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap, vec3 normal, vec3 lightDir)
 {
-    // perform perspective divide
-    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+   vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
     projCoords = projCoords * 0.5 + 0.5;
-    
-    float closestDepth = texture(DepthText, projCoords.xy).r; 
+
+    if(projCoords.z > 1.0)
+        return 0.0;
+
+    float currentDepth = projCoords.z;
+    float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.0005); // much smaller bias
+
     float shadow = 0.0;
     float samples = 0.0;
     vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
-    
-    float currentDepth = projCoords.z;
-    
-    shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
-    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);  
 
     for(float x = -light.shadowSoftness; x <= light.shadowSoftness; x += 1.0)
     {
@@ -71,12 +70,8 @@ float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap, vec3 normal
             samples++;
         }
     }
-    shadow /= samples;
 
-    if(projCoords.z > 1.0)
-        shadow = 0.0;
-
-    return shadow;
+    return shadow / samples;
 }
 
 vec3 Calculate_Dir(Light light, vec3 materialDiffuse, vec3 materialSpecular)
