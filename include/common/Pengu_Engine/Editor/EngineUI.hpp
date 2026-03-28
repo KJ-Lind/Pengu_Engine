@@ -11,6 +11,20 @@ namespace fs = std::filesystem;
 struct GLFWwindow;
 namespace Pengu::Core { class PenguEngine; }
 
+inline constexpr const char* PAYLOAD_TEXTURE = "TEXTURE_ASSET";
+
+struct TextureDragPayload
+{
+	char path[256];
+};
+
+inline constexpr const char* PAYLOAD_MESH = "MESH_ASSET";
+
+struct MeshDragPayload
+{
+	char path[256];
+};
+
 class EngineUI {
 public:
 
@@ -24,7 +38,7 @@ private:
 	Pengu::Core::PenguEngine* m_engine = nullptr;
 
 	void drawMenuBar(EditorState& state);
-	
+
 	void drawHierarchy(EditorState& state);
 	void drawInspector(EditorState& state);
 

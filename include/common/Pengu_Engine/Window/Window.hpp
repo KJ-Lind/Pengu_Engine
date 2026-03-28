@@ -39,6 +39,8 @@ public:
 	};
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	static void window_iconify_callback(GLFWwindow* window, int iconified);
+
 
 	int GetWidth();
 	int GetHeight();
