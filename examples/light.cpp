@@ -1,6 +1,6 @@
 #include "Pengu_Engine/Scene/Scene.hpp"
 #include "Pengu_Engine/PenguEngine.hpp"
-#include "Pengu_Engine/Scene/LightScene.hpp"
+#include "../assets/scenes/ScriptingScene.hpp"
 #include "Pengu_Engine/Misc/FramRate.hpp"
 #include "Pengu_Engine/Editor/EngineUI.hpp"
 #include "Pengu_Engine/Editor/EditorState.hpp"
@@ -15,7 +15,7 @@ static EngineConfig config{ .screen_width = 1280, .screen_height = 960, .title =
 int main() {
 	auto engine = PenguEngine::startEngine(config);
 
-	engine.loadScene(std::make_unique<Pengu::Scene::LightScene>(&engine));
+	engine.loadScene(std::make_unique<Pengu::Scene::ScriptingScene>(&engine));
 
 	EditorState state;
 	EngineUI    ui;

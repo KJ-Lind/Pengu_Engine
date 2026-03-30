@@ -8,7 +8,7 @@ end
 
 function Script:onUpdate(dt)
     local rot = self:getRotation()
-    rot.y = rot.y - Script.rotspeed * dt
+    rot.z = rot.z - Script.rotspeed * dt
     self:setRotation(rot)
 end
 

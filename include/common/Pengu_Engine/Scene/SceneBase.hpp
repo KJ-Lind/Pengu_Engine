@@ -5,7 +5,9 @@
 #include "Pengu_Engine/Components/DrawableComponent.hpp"
 #include "Pengu_Engine/Components/TransformComponent.hpp"
 #include "Pengu_Engine/Components/LightComponent.hpp"
+#include "Pengu_Engine/Components/ScriptComponent.hpp"
 #include "Pengu_Engine/Systems/LightSystem.hpp"
+#include "Pengu_Engine/Systems/ScriptSystem.hpp"
 
 #include <vector>
 #include <string>

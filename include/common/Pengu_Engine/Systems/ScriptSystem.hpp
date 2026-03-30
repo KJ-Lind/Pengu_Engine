@@ -14,9 +14,10 @@
 class Scripting : public System {
 
 public:
-	Scripting();
+	Scripting(ECSManager& ecs);
+	~Scripting() = default;
 
-	void Init(std::shared_ptr<ECSManager> ecs, Input* inp);
+	void Init(Input* inp);
 
 	void Update(double dt);
 
@@ -47,7 +48,7 @@ private:
 	std::unordered_map<std::string, sol::bytecode> scriptCache_;
 	std::set<Entity> entitiesToReload_;
 	std::unique_ptr<sol::state> globalLuaState_;
-	std::shared_ptr<ECSManager> ecs_;
+	ECSManager& m_world;
 };
 
 

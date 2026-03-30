@@ -25,10 +25,19 @@ namespace Pengu::Graphics::Rendering { class Renderer; }
 
 namespace Pengu::Core {
 
+	enum class RenderPipeline {
+		Unlit,
+		Forward,
+		ForwardShad,
+		Deferred
+	};
+
 	struct EngineConfig {
 		unsigned int screen_width;
 		unsigned int screen_height;
 		std::string title;
+		RenderPipeline pipeline;
+
 		float cam_speed = 0.005f;
 		float fov = 90.0f;
 		float cam_sens = 0.1f;
