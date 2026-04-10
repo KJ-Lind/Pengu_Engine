@@ -55,7 +55,7 @@ float ShadowCalculation(vec4 fragPosLightSpace, sampler2D shadowMap, vec3 normal
         return 0.0;
 
     float currentDepth = projCoords.z;
-    float bias = max(0.005 * (1.0 - dot(normal, lightDir)), 0.0005); // much smaller bias
+    float bias = max(0.000000000005 * (1.0 - dot(normal, lightDir)), 0.0000000000005);
 
     float shadow = 0.0;
     float samples = 0.0;

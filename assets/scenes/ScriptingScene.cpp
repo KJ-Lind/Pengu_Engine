@@ -37,7 +37,7 @@ void Pengu::Scene::ScriptingScene::onLoad(Pengu::Resources::ResourceManager& rm)
 		entity = world.CreateEntity();
 
 		world.AddComponent(entity, DrawableComponent(frieren));
-		world.AddComponent(entity, TransformComponent{ glm::vec3(distrib(gen), distrib(gen), distrib(gen)),glm::vec3(1.0f), glm::vec3(-90.0f,0.0f,0.0f) });
+		world.AddComponent(entity, TransformComponent{ glm::vec3(distrib(gen), distrib(gen), distrib(gen)),glm::vec3(1.0f), glm::vec3(-1.57f,0.0f,0.0f) });
 		world.AddComponent(entity, ScriptingComponent("../assets/scripts/entities.lua"));
 	}
 
@@ -50,7 +50,7 @@ void Pengu::Scene::ScriptingScene::onLoad(Pengu::Resources::ResourceManager& rm)
 	world.AddComponent(player, ScriptingComponent("../assets/scripts/player.lua"));
 	world.AddComponent(player, TagComponent("Player"));
 
-	
+
 	refreshRenderables();
 
 	scriptsys->Init(&m_engine->GetInput());

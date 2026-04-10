@@ -100,12 +100,12 @@ namespace Pengu::Scene {
 		getWorld().AddComponent(ball, TransformComponent(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(1.0f), glm::vec3(0.0f)));
 		getWorld().AddComponent(ball, TagComponent("Ball"));
 
-		auto Sun = world.CreateEntity();
+		/*auto Sun = world.CreateEntity();
 		world.AddComponent(Sun, Lights(LightType::E_Directional));
 		world.AddComponent(Sun, TransformComponent(glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(0.0f)));
 		world.AddComponent(Sun, TagComponent("Sun"));
 		world.GetComponent<Lights>(Sun).color_ = glm::vec3(0.5f, 0.5f, 0.5f);
-		world.GetComponent<Lights>(Sun).shadowSoftness_ = 0.5f;
+		world.GetComponent<Lights>(Sun).shadowSoftness_ = 0.5f;*/
 
 		refreshRenderables();
 	}

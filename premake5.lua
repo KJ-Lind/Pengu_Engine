@@ -70,3 +70,4 @@ function example_project(name, source)
 end
 
 example_project("Lighting", "examples/light.cpp")
+example_project("Scripting", "examples/scripting.cpp")

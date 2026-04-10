@@ -24,6 +24,7 @@ namespace Pengu::Graphics::Rendering {
 
 		void init(Pengu::Resources::ResourceManager& rm) override;
 		void cleanup() override;
+		void reload(Pengu::Resources::ResourceManager& rm) override;
 
 		void render(Pengu::Scene::SceneBase& scene, Camera& camera) override;
 
@@ -53,7 +54,7 @@ namespace Pengu::Graphics::Rendering {
 		int m_width = 0;
 		int m_height = 0;
 
-		int shadowResolution = 256;
+		int shadowResolution = 512;
 		GLuint shadowMapFBO = 0;
 		GLuint shadowMapTexture = 0;
 	};

@@ -15,7 +15,7 @@ class Scripting : public System {
 
 public:
 	Scripting(ECSManager& ecs);
-	~Scripting() = default;
+	~Scripting();
 
 	void Init(Input* inp);
 
@@ -29,6 +29,10 @@ protected:
 
 	void BindAPI(Input* inp);
 
+	void bindGLM();
+	void bindEngine();
+	void bindLogger();
+
 	void LoadScript(Entity entity, ScriptingComponent& sc);
 
 	void ReloadScript(Entity entity, ScriptingComponent& sc);
@@ -40,11 +44,13 @@ protected:
 
 		if (!result.valid()) {
 			sol::error err = result;
-			throw std::logic_error(err.what());
+			SCRP_ERROR("[Lua Call Error] {0}", err.what());
 		}
 	}
 
 private:
+	void Shutdown();
+
 	std::unordered_map<std::string, sol::bytecode> scriptCache_;
 	std::set<Entity> entitiesToReload_;
 	std::unique_ptr<sol::state> globalLuaState_;

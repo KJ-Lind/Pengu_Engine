@@ -29,6 +29,8 @@ namespace Pengu::Graphics::Rendering {
 
 		bool hasPipeline() const { return m_pipeline != nullptr; }
 
+		void reload();
+
 		void shutdown();
 
 	private:

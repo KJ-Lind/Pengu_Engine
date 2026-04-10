@@ -20,6 +20,7 @@ namespace Pengu::Graphics::Rendering {
 
 		virtual void init(Pengu::Resources::ResourceManager& rm) = 0;
 		virtual void cleanup() = 0;
+		virtual void reload(Pengu::Resources::ResourceManager& rm) = 0;
 
 		virtual void onPreRender(Pengu::Scene::SceneBase& scene, Camera& camera) {}
 
@@ -29,6 +30,7 @@ namespace Pengu::Graphics::Rendering {
 
 		virtual const std::string& getName() const = 0;
 		bool isInitialized() const { return m_initialized; }
+		bool bWireFrame = false;
 
 	protected:
 		bool m_initialized = false;

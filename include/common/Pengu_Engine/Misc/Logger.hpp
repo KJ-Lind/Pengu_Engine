@@ -16,12 +16,14 @@ public:
 
 	static std::shared_ptr<spdlog::logger>& PE();
 	static std::shared_ptr<spdlog::logger>& LOG();
+	static std::shared_ptr<spdlog::logger>& SCRIPT();
 
-	
 private:
 
 	static std::shared_ptr<spdlog::logger> s_PenguEngine;
 	static std::shared_ptr<spdlog::logger> s_Logger;
+	static std::shared_ptr<spdlog::logger> s_Scripting;
+
 };
 
 #endif // ! LOGGER_HPP

@@ -31,7 +31,7 @@ namespace Pengu::Graphics {
 		Mesh() = default;
 
 		bool loadFromAssimp(aiMesh* mesh);
-		void Draw();
+		void Draw(bool bWireFrame);
 
 		bool isValid() const {
 			if (m_indexCount > 0 && m_vertexCount > 0)
@@ -63,7 +63,6 @@ namespace Pengu::Graphics {
 
 		void upload(const std::vector<Vertex>& vertices,
 			const std::vector<unsigned int>& indices);
-
 	private:
 		void processMesh(aiMesh* mesh);
 		void uploadToGPU();

@@ -24,6 +24,7 @@ namespace Pengu::Graphics::Rendering {
 
 		void init(Pengu::Resources::ResourceManager& rm) override;
 		void cleanup() override;
+		void reload(Pengu::Resources::ResourceManager& rm) override;
 
 		void render(Pengu::Scene::SceneBase& scene, Camera& camera) override;
 
